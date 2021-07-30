@@ -93,9 +93,19 @@ for input_file_without_directory in onlyfiles:
     fields = ["School Code", "Address", "Longitude", "Latitude","isCorrect"]
 
     # replace the missing values with a dummy value
+    
+
     for index, postal in enumerate(pincodesSCH):
-        if (math.isnan(postal)):
-            pincodesSCH[index] = 999999.0
+        if (type(postal) == str):
+            if (postal != postal):
+                pincodesSCH[index] = '999999'
+            if (postal == ""):
+                pincodesSCH[index] = '999999'
+            if (postal == "Pincode"):
+                pincodesSCH[index] = '999999'
+        if (type(postal) == int) | (type(postal) == float):
+            if (math.isnan(postal)):
+                pincodesSCH[index] = 999999.0
 
     # convert the pincodes in the list from float type to int
     pincodesSCH = list(map(int, pincodesSCH))
